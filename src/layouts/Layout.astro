@@ -1,0 +1,55 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+	hasAnnouncement?: boolean;
+}
+
+const { title, description = "Glasgow's trusted paving specialists.", hasAnnouncement = false } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  
+  <link rel="icon" href="/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <slot name="head" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <a href="tel:07492263394" class="float-call">📞 Free Quote – Call Now</a>
+
+  <div class="topbar">
+    <span>📍 Glasgow & Central Scotland</span>
+    <span>⭐ 5-Star Rated on Google</span>
+    <span>Free Quotes – Call <a href="tel:07492263394">07492 263394</a></span>
+  </div>
+
+  {hasAnnouncement && (
+  <div class="announce-bar">
+    <span>🚗 New Glasgow parking regs? Book a driveway this month &mdash; <strong>get &pound;100 off your installation price.</strong></span>
+    <a href="/#contact" class="announce-cta">Get a Free Quote &rarr;</a>
+  </div>
+  )}
+
+  <Header />
+
+  <slot />
+
+  <Footer />
+
+  <script src="/js/main.js" is:inline></script>
+</body>
+</html>
